@@ -9,174 +9,26 @@ import java.util.Scanner;
 public class TicTacToe {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        char[][] board = {{' ', ' ', ' '}, 
-                          {' ', ' ', ' '}, 
-                          {' ', ' ', ' '}};
+        Board board = new Board();
+        GameLogic gameLogic = new GameLogic();
+        Player player1 = new Player('X', "Player 1");
+        Player player2 = new Player('O', "Player 2");
 
         System.out.println("1|2|3\n-+-+-\n4|5|6\n-+-+-\n7|8|9");
 
         while (true) {   //continue until game outcome is reached
-            playerOneMove(board, scanner);   
-            if (isGameFinished(board)) {
+            player1.makeMove(board, scanner);
+            if (gameLogic.isGameFinished(board)) {
                 break;
             }
-            printBoard(board);
-            playerTwoMove(board, scanner);
-            if (isGameFinished(board)) {
+            board.printBoard();
+
+            player2.makeMove(board, scanner);
+            if (gameLogic.isGameFinished(board)) {
                 break;
             }
-            printBoard(board);
+            board.printBoard();
         }
         scanner.close();
-    }
-
-    private static boolean isGameFinished(char[][] board) {
-        //check if player1 wins
-        if (playerWon(board, 'X')) {
-            printBoard(board);
-            System.out.println("Player One wins!");
-            return true;
-        }
-        //check if player2 wins
-        if (playerWon(board, 'O')) {
-            printBoard(board);
-            System.out.println("Player Two wins!");
-            return true;
-        }
-        //check for draw
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == ' ') {
-                    return false;
-                }
-            }
-        }
-        printBoard(board);
-        System.out.println("The game ended in a draw!");
-        return true;
-    }
-
-
-    private static boolean playerWon(char[][] board, char playerIndicator) {
-        if (//check row win
-            (board[0][0] == playerIndicator && board[0][1] == playerIndicator && board[0][2] == playerIndicator) || 
-            (board[1][0] == playerIndicator && board[1][1] == playerIndicator && board[1][2] == playerIndicator) ||
-            (board[2][0] == playerIndicator && board[2][1] == playerIndicator && board[2][2] == playerIndicator) ||
-            //check column win
-            (board[0][0] == playerIndicator && board[1][0] == playerIndicator && board[2][0] == playerIndicator) || 
-            (board[0][1] == playerIndicator && board[1][1] == playerIndicator && board[2][1] == playerIndicator) ||
-            (board[0][2] == playerIndicator && board[1][2] == playerIndicator && board[2][2] == playerIndicator) ||
-            //check diagonal win
-            (board[0][0] == playerIndicator && board[1][1] == playerIndicator && board[2][2] == playerIndicator) || 
-            (board[0][2] == playerIndicator && board[1][1] == playerIndicator && board[2][0] == playerIndicator)) {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isValidMove(char[][] board, String position) {
-        //valid move if space is unoccupied
-        switch (position) {
-            case "1":
-                return (board[0][0] == ' ');
-            case "2":
-                return (board[0][1] == ' ');
-            case "3":
-                return (board[0][2] == ' ');
-            case "4":
-                return (board[1][0] == ' ');
-            case "5":
-                return (board[1][1] == ' ');
-            case "6":
-                return (board[1][2] == ' ');
-            case "7":
-                return (board[2][0] == ' ');
-            case "8":
-                return (board[2][1] == ' ');
-            case "9":
-                return (board[2][2] == ' ');
-            default:
-                return false;
-        }
-    }
-
-    private static void playerOneMove(char[][] board, Scanner in) {
-
-        System.out.println("Player 1, which space would you like to choose? (1-9): ");
-
-        String playerOneInput = in.nextLine(); // maybe next int for validation
-
-        while (true) { //validate move
-            if (isValidMove(board, playerOneInput)) {
-                break;
-            }
-            else {
-                System.out.println("Oops, try again. Choose an open space: ");
-                playerOneInput = in.nextLine();
-            }
-        }
-        placeMove(board, playerOneInput, 'X'); //place move on board if valid
-    }
-
-    private static void playerTwoMove(char[][] board, Scanner in) {
-        System.out.println("Player 2, which space would you like to choose? (1-9): ");
-
-        String playerTwoInput = in.nextLine(); 
-
-        while (true) {
-            if (isValidMove(board, playerTwoInput)) {
-                break;
-            }
-            else {
-                System.out.println("Oops, try again. Choose an open space: ");
-                playerTwoInput = in.nextLine();
-            }
-        }
-        placeMove(board, playerTwoInput, 'O');
-    }
-
-    private static void placeMove(char[][] board, String position, char playerIndicator) {
-        //place indicator in corresponding array index
-        switch (position) {
-            case "1":
-                board[0][0] = playerIndicator;
-                break;
-            case "2":
-                board[0][1] = playerIndicator;
-                break;
-            case "3":
-                board[0][2] = playerIndicator;
-                break;
-            case "4":
-                board[1][0] = playerIndicator;
-                break;
-            case "5":
-                board[1][1] = playerIndicator;
-                break;
-            case "6":
-                board[1][2] = playerIndicator;
-                break;
-            case "7":
-                board[2][0] = playerIndicator;
-                break;
-            case "8":
-                board[2][1] = playerIndicator;
-                break;
-            case "9":
-                board[2][2] = playerIndicator;
-                break;
-            default:
-                System.out.print("Unable to place move");
-                break;
-        }
-    }
-
-    public static void printBoard(char[][] board) {
-        System.out.println(board[0][0] + "|" + board[0][1] + "|" + board[0][2]);
-        System.out.println("-+-+-");
-        System.out.println(board[1][0] + "|" + board[1][1] + "|" + board[1][2]);
-        System.out.println("-+-+-");
-        System.out.println(board[2][0] + "|" + board[2][1] + "|" + board[2][2]);
     }
 }
