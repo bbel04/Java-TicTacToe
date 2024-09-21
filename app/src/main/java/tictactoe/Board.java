@@ -11,34 +11,34 @@ public class Board {
         };
     }
 
-    public void placeMove(String position, char playerIndicator) {
+    public void placeMove(int position, char playerIndicator) {
         //place indicator in corresponding array index
         switch (position) {
-            case "1":
+            case 1:
                 board[0][0] = playerIndicator;
                 break;
-            case "2":
+            case 2:
                 board[0][1] = playerIndicator;
                 break;
-            case "3":
+            case 3:
                 board[0][2] = playerIndicator;
                 break;
-            case "4":
+            case 4:
                 board[1][0] = playerIndicator;
                 break;
-            case "5":
+            case 5:
                 board[1][1] = playerIndicator;
                 break;
-            case "6":
+            case 6:
                 board[1][2] = playerIndicator;
                 break;
-            case "7":
+            case 7:
                 board[2][0] = playerIndicator;
                 break;
-            case "8":
+            case 8:
                 board[2][1] = playerIndicator;
                 break;
-            case "9":
+            case 9:
                 board[2][2] = playerIndicator;
                 break;
             default:

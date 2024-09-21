@@ -13,11 +13,11 @@ public class Player {
 
     public void makeMove(Board board, Scanner in) {
         System.out.println(playerName + ", which space would you like to choose? (1-9): ");
-        String playerInput = in.nextLine();
+        int playerInput = in.nextInt();
 
         while (!Validation.isValidMove(board.getBoard(), playerInput)) {
             System.out.println("Oops, try again. Choose an open space: ");
-            playerInput = in.nextLine();
+            playerInput = in.nextInt();
         }
 
         board.placeMove(playerInput, playerSymbol);
