@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
@@ -12,14 +13,24 @@ public class Player {
     }
 
     public void makeMove(Board board, Scanner in) {
-        System.out.println(playerName + ", which space would you like to choose? (1-9): ");
-        int playerInput = in.nextInt();
+        int playerInput;
+        boolean validInput = false;
 
-        while (!Validation.isValidMove(board.getBoard(), playerInput)) {
-            System.out.println("Oops, try again. Choose an open space: ");
-            playerInput = in.nextInt();
+        while (!validInput) {
+            System.out.println(playerName + ", which space would you like to choose? (1-9): ");
+            try {
+                playerInput = in.nextInt();
+                if (Validation.isValidMove(board.getBoard(), playerInput)) {
+                    validInput = true;
+                    board.placeMove(playerInput, playerSymbol);
+                } 
+                else {
+                    System.out.println("Oops, try again. Choose an open space: ");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number 1-9.");
+                in.next();
+            }
         }
-
-        board.placeMove(playerInput, playerSymbol);
     }
 }
