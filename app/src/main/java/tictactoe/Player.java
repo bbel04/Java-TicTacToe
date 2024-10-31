@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
@@ -32,5 +33,18 @@ public class Player {
                 in.next();
             }
         }
+    }
+
+    public void computerTurn(Board board) {
+        Random rand = new Random();
+        int computerMove;
+        while (true) {
+            computerMove = rand.nextInt(9) + 1;
+            if (Validation.isValidMove(board.getBoard(), computerMove)) {
+                break;
+            }
+        }
+        System.out.println("Computer chose space " + computerMove);
+        board.placeMove(computerMove, 'O');
     }
 }

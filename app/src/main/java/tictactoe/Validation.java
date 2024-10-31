@@ -13,7 +13,7 @@ public class Validation {
         
         switch (position) {
             case 1:
-                return (board[0][0] == ' ');
+                return (board[0][0] == ' ');   //return true if condition is true
             case 2:
                 return (board[0][1] == ' ');
             case 3:

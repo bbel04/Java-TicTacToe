@@ -22,7 +22,7 @@ public class TestGameLogic {
         board.placeMove(2, 'X');
         board.placeMove(3, 'X');
         
-        assertTrue(gameLogic.isGameFinished(board));  // Player 1 should win
+        assertTrue(gameLogic.isGameFinished(board, 1));  // Player 1 should win
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TestGameLogic {
     board.placeMove(5, 'X');
     board.placeMove(9, 'X');
 
-    assertTrue(gameLogic.isGameFinished(board));  // Player 1 should win
+    assertTrue(gameLogic.isGameFinished(board, 1));  // Player 1 should win
 }
 
     @Test
@@ -42,7 +42,7 @@ public class TestGameLogic {
     board.placeMove(5, 'O');
     board.placeMove(6, 'O');
     
-    assertTrue(gameLogic.isGameFinished(board));  // Player 2 should win
+    assertTrue(gameLogic.isGameFinished(board, 1));  // Player 2 should win
 }
 
     @Test
@@ -52,6 +52,6 @@ public class TestGameLogic {
     board.placeMove(4, 'O');
     board.placeMove(7, 'O');
 
-    assertTrue(gameLogic.isGameFinished(board));  // Player 2 should win
+    assertTrue(gameLogic.isGameFinished(board, 1));  // Player 2 should win
 }
 }

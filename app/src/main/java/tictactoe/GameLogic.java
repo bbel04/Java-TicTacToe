@@ -1,7 +1,8 @@
 package tictactoe;
 
 public class GameLogic {
-    public boolean isGameFinished(Board board) {
+
+    public boolean isGameFinished(Board board, int menuMode) {
         char[][] b = board.getBoard();
         //check if player1 wins
         if (playerWon(b, 'X')) {
@@ -12,9 +13,15 @@ public class GameLogic {
         //check if player2 wins
         if (playerWon(b, 'O')) {
             board.printBoard();
-            System.out.println("Player Two wins!");
+            if (menuMode == 1) { //human vs human, player win
+                System.out.println("Player Two wins!");
+            }
+            else {  //human vs computer, computer win
+                System.out.println("Computer wins!");
+            }            
             return true;
         }
+        
         //check for draw
         for (int i = 0; i < b.length; i++) {
             for (int j = 0; j < b[i].length; j++) {
