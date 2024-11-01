@@ -59,7 +59,7 @@ public class Board {
         System.out.println(board[2][0] + "|" + board[2][1] + "|" + board[2][2]);
     }
 
-    public void reset () {
+    public void reset () {   //clear board, reset to blank spaces
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 2; j++) {
                 board[i][j] = ' ';
