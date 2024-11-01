@@ -35,16 +35,16 @@ public class Player {
         }
     }
 
-    public void computerTurn(Board board) {
+    public void computerTurn(Board board) {  
         Random rand = new Random();
         int computerMove;
         while (true) {
-            computerMove = rand.nextInt(9) + 1;
-            if (Validation.isValidMove(board.getBoard(), computerMove)) {
+            computerMove = rand.nextInt(9) + 1;    //random move from 1-9
+            if (Validation.isValidMove(board.getBoard(), computerMove)) {  //break when valid space chosen by computer
                 break;
             }
         }
-        System.out.println("Computer chose space " + computerMove);
+        System.out.println("Computer chose space " + computerMove);  //display computer move
         board.placeMove(computerMove, 'O');
     }
 }

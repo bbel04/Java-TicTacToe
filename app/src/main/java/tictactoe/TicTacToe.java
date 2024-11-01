@@ -18,41 +18,46 @@ public class TicTacToe {
         Player player2 = new Player('O', "Player 2");
         Player computerPlayer = new Player('O', "Computer Player");
 
+        boolean playing = true;
+
         menu.gameMode();   // Game Menu
-        
-        System.out.println("1|2|3\n-+-+-\n4|5|6\n-+-+-\n7|8|9");
 
-        if (menu.mode == 1) {
-            while (true) {   //continue until game outcome is reached
-                player1.makeMove(board, scanner);
-                if (gameLogic.isGameFinished(board, menu.mode)) {
-                    break;
-                }
-                board.printBoard();
+        while(playing) {
+            System.out.println("1|2|3\n-+-+-\n4|5|6\n-+-+-\n7|8|9");
 
-                player2.makeMove(board, scanner);
-                if (gameLogic.isGameFinished(board, menu.mode)) {
-                    break;
+            if (menu.mode == 1) { //human vs human logic
+                while (true) {   //continue until game outcome is reached
+                    player1.makeMove(board, scanner);
+                    if (gameLogic.isGameFinished(board, menu.mode)) { // send mode choice as a parameter
+                        break;
+                    }
+                    board.printBoard();
+
+                    player2.makeMove(board, scanner);
+                    if (gameLogic.isGameFinished(board, menu.mode)) {
+                        break;
+                    }
+                    board.printBoard();
                 }
-                board.printBoard();
             }
-        }
-        else {
-            while (true) {   //continue until game outcome is reached
-                player1.makeMove(board, scanner);
-                if (gameLogic.isGameFinished(board, menu.mode)) {
-                    break;
-                }
-                board.printBoard();
+            else { //human vs computer logic
+                while (true) {   //continue until game outcome is reached
+                    player1.makeMove(board, scanner);
+                    if (gameLogic.isGameFinished(board, menu.mode)) {
+                        break;
+                    }
+                    board.printBoard();
 
-                computerPlayer.computerTurn(board);
-                if (gameLogic.isGameFinished(board, menu.mode)) {
-                    break;
+                    computerPlayer.computerTurn(board);
+                    if (gameLogic.isGameFinished(board, menu.mode)) {
+                        break;
+                    }
+                    board.printBoard();
                 }
-                board.printBoard();
             }
-        }
 
+            playing = Menu.playAgain(scanner, board); //set playing flag to true or false depending on playAgain return value
+        }
         scanner.close();
     }
 }
